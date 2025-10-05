@@ -8,41 +8,40 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="display-area"></div>
+    <div class="display-area screen">
+          <div class="screen-last" id="lastScreenDisplay"></div>
+          <div class="screen-current" id="currentScreenDisplay">0</div>
+    </div>
     <div class="button-area">
-        <button data-number>1</button>
-        <button data-number>2</button> 
-        <button data-number>3</button>  
+      <div>
+        <button class="clear-button">C</button>
+      </div>
+      <div>
+        <button data-number>7</button>
+        <button data-number>8</button> 
+        <button data-number>9</button>  
+        <button data-operator>/</button>
+      </div>
+      <div>
         <button data-number>4</button> 
         <button data-number>5</button>  
         <button data-number>6</button> 
-        <button data-number>7</button>
-        <button data-number>8</button>  
-        <button data-number>9</button> 
-        <button data-number>0</button>
-    </div>
-    <button class="equal-btn">=</button>
-    <div>
-        <button data-operator>+</button>
-        <button data-operator>-</button>
         <button data-operator>*</button>
-        <button data-operator>/</button>
-        <button>Cancel</button>
+      </div>
+      <div>
+        <button data-number>1</button>
+        <button data-number>2</button>  
+        <button data-number>3</button> 
+        <button data-operator>+</button>
+      </div>
+      <div>
+        <button data-number>0</button>
+        <button class="equal-btn">=</button>
+        <button class="point-button">.</button>
+        <button data-operator>-</button>
+      </div>
     </div>
     </div>
       <script src="main.js"></script>
 </body>
 </html>
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>This is challenge on loops and Arrays</h1>
-  <script src="main.js"></script>
-</body>
-</html> -->
