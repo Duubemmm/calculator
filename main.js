@@ -5,6 +5,7 @@ const displayArea = document.querySelector(".display-area")
 const clearBtn = document.querySelector(".clear-button")
 const lastScreenDisplay = document.querySelector("#lastScreenDisplay")
 const currentScreenDisplay = document.querySelector("#currentScreenDisplay")
+const pointBtn = document.querySelector(".point-button")
 
 let num1 = "";
 let num2 = "";
@@ -12,7 +13,7 @@ let currentOperator = null;
 let shouldResetDisplay = false;
 
 btnElement.forEach((button) => {
-    button.addEventListener("click", btnValue)
+    button.addEventListener("click", () => btnValue(button.textContent))
 })
 
 operatorElement.forEach((operator) => {
@@ -21,11 +22,10 @@ operatorElement.forEach((operator) => {
 
 equalBtn.addEventListener("click", evaluate)
 
-function btnValue(event){
- const buttonValue = event.target.textContent  
+function btnValue(num){ 
  if(currentScreenDisplay.textContent === '0' || shouldResetDisplay)
-    resetScreen()
- currentScreenDisplay.textContent += buttonValue
+    resetDisplay()
+ currentScreenDisplay.textContent += num
 }
 
 function operatorValue(operator){
@@ -33,7 +33,7 @@ function operatorValue(operator){
   num1 = currentScreenDisplay.textContent
   currentOperator = operator
   lastScreenDisplay.textContent = `${num1} ${currentOperator}`
-  shouldResetScreen = true
+  shouldResetDisplay = true
 }
 
 function calculate(num1, currentOperator, num2){
@@ -66,15 +66,18 @@ function evaluate(){
   lastScreenDisplay.textContent = `${num1} ${currentOperator} ${num2} =`
   currentOperator = null
 }
+
 clearBtn.addEventListener("click", clear)
+
 function clear(){
-  num1 = ""
-  num2 = ""  
-  currentOperator = ""
-  displayArea.textContent = ""
+  currentScreenDisplay.textContent = '0'
+  lastScreenDisplay.textContent = ''
+  num1 = ''
+  num2 = ''
+  currentOperator = null
 }
 
-function resetScreen(){
+function resetDisplay(){
   currentScreenDisplay.textContent = ''
   shouldResetDisplay = false
 }
