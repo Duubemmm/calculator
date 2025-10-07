@@ -1,3 +1,4 @@
+//Get the DOM elements
 const btnElement = document.querySelectorAll("[data-number]")
 const operatorElement = document.querySelectorAll("[data-operator]")
 const equalBtn = document.querySelector(".equal-btn")
@@ -6,12 +7,15 @@ const clearBtn = document.querySelector(".clear-button")
 const lastScreenDisplay = document.querySelector("#lastScreenDisplay")
 const currentScreenDisplay = document.querySelector("#currentScreenDisplay")
 const pointBtn = document.querySelector(".point-button")
+const deleteBtn = document.querySelector(".delete-button")
 
+//Initialize the variables
 let num1 = "";
 let num2 = "";
 let currentOperator = null;
 let shouldResetDisplay = false;
 
+//Add event listeners to the DOM elements
 btnElement.forEach((button) => {
     button.addEventListener("click", () => btnValue(button.textContent))
 })
@@ -21,6 +25,8 @@ operatorElement.forEach((operator) => {
 })
 
 equalBtn.addEventListener("click", evaluate)
+pointBtn.addEventListener("click", pointFn)
+deleteBtn.addEventListener("click", deleteFn)
 
 function btnValue(num){ 
  if(currentScreenDisplay.textContent === '0' || shouldResetDisplay)
@@ -56,12 +62,12 @@ function calculate(num1, currentOperator, num2){
 
 function evaluate(){
   if (currentOperator === null || shouldResetDisplay) return
-  if (currentOperator === '÷' && currentScreenDisplay.textContent === '0') {
+  if (currentOperator === '/' && currentScreenDisplay.textContent === '0') {
     alert("You can't divide by 0!")
     return
   }
   num2 = currentScreenDisplay.textContent
-  currentScreenDisplay.textContent = calculate(num1, currentOperator, num2)
+  currentScreenDisplay.textContent = roundResult(calculate(num1, currentOperator, num2))
   
   lastScreenDisplay.textContent = `${num1} ${currentOperator} ${num2} =`
   currentOperator = null
@@ -80,6 +86,24 @@ function clear(){
 function resetDisplay(){
   currentScreenDisplay.textContent = ''
   shouldResetDisplay = false
+}
+
+function pointFn(){
+  if (shouldResetDisplay) resetDisplay()
+  if (currentScreenDisplay.textContent === '')
+    currentScreenDisplay.textContent = '0'
+  if (currentScreenDisplay.textContent.includes('.')) return
+  currentScreenDisplay.textContent += '.'
+}
+
+function deleteFn(){
+  currentScreenDisplay.textContent = currentScreenDisplay.textContent
+    .toString()
+    .slice(0, -1)
+}
+
+function roundResult(num) {
+  return Math.round(num * 1000) / 1000
 }
 
 function add(num1,num2){
